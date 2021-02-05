@@ -1,18 +1,33 @@
 <div class="container">
+  <div class="d-flex justify-content-center mt-5">
+    <i class="fas fa-link fa-10x"></i>
+  </div>
 
-  <form method="POST" action="/">
-    <input type="text" name="originUrl">
-    <button type="submit">Shorten</button>
-  </form>
-  {{#if shortenUrl}}
-  <div>
-    <input type="text" name="shortenUrl" value="{{ shortenUrl }}">
+  <div class="mt-5 mx-auto" style="
+      width: 75%;"> 
+    <form method="POST" action="/" >
+
+      {{#if duplicatedMsg}}
+      <div class="alert alert-danger" role="alert">
+        {{ duplicatedMsg }}
+      </div>
+      {{/if}}
+
+      <div class="form-group">
+        <input type="text" class="form-control" name="originUrl" placeholder="Input URL here" {{#if shortenUrl}}value="{{ shortenUrl }}"{{/if}}>
+      </div>
+
+      {{#if shortenUrl}}
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" type="submit">Copy</button>
+      </div>
+      {{else}}
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" type="submit">Shorten</button>
+      </div>
+      {{/if}}
+      
+    </form>
   </div>
-  {{/if}}
-  {{#if duplicatedMsg}}
-  <div>
-    <h4>{{ duplicatedMsg }}</h4>
-  </div>
-  {{/if}}
 
 </div>
