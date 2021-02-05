@@ -24,5 +24,17 @@ router.post('/', (req, res) => {
   }).then(() => res.render('index', { shortenUrl }))
 })
 
+router.get('/:path', (req, res) => {
+  const path = req.params.path
+  const shortenUrl = basicUrl + path
+
+  Url.find({ shortenUrl })
+    .then(url => {
+      const originUrl = url[0].originUrl
+      res.redirect(originUrl)
+    })
+    .catch(error => console.log(error))
+})
+
 // Export
 module.exports = router
