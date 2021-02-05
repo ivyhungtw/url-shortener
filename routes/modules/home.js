@@ -6,9 +6,9 @@ const router = express.Router()
 const Url = require('../../models/url')
 
 // Define variables
-const production = 'https://fathomless-stream-96837.herokuapp.com/ '
+const production = 'https://fathomless-stream-96837.herokuapp.com/'
 const development = 'http://localhost:3000/'
-const basicUrl = process.env.NODE_ENV ? production : development
+const baseUrl = process.env.NODE_ENV ? production : development
 
 // Create functions
 function generatePath() {
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const originUrl = req.body.originUrl
   let randomPath = generatePath()
-  let shortenUrl = basicUrl + randomPath
+  let shortenUrl = baseUrl + randomPath
   let duplicatedMsg
 
   Url.exists({ shortenUrl })
@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
 
 router.get('/:path', (req, res) => {
   const path = req.params.path
-  const shortenUrl = basicUrl + path
+  const shortenUrl = baseUrl + path
 
   Url.find({ shortenUrl })
     .then(url => {
