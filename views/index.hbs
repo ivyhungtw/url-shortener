@@ -13,13 +13,19 @@
       </div>
       {{/if}}
 
+      {{#if shortenUrl}}
+      <div class="alert alert-success" role="alert">
+        Success! Please use this link:
+      </div>
+      {{/if}}
+
       <div class="form-group">
         <input type="text" class="form-control" name="originUrl" placeholder="Input URL here" {{#if shortenUrl}}value="{{ shortenUrl }}"{{/if}} required>
       </div>
 
       {{#if shortenUrl}}
       <div class="d-flex justify-content-center">
-        <button class="btn btn-primary" type="submit">Copy</button>
+        <button class="btn btn-primary" type="button">Copy</button>
       </div>
       {{else}}
       <div class="d-flex justify-content-center">
