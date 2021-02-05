@@ -20,12 +20,12 @@
       {{/if}}
 
       <div class="form-group">
-        <input type="text" class="form-control" name="originUrl" placeholder="Input URL here" {{#if shortenUrl}}value="{{ shortenUrl }}"{{/if}} required>
+        <input type="text" class="form-control" name="originUrl" placeholder="Input URL here" {{#if shortenUrl}}value="{{ shortenUrl }}"{{/if}} id="textArea" required>
       </div>
 
       {{#if shortenUrl}}
       <div class="d-flex justify-content-center">
-        <button class="btn btn-primary" type="button">Copy</button>
+        <button class="btn btn-primary" type="button" id="copyBtn">Copy</button>
       </div>
       {{else}}
       <div class="d-flex justify-content-center">

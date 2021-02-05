@@ -18,6 +18,9 @@ app.set('view engine', 'hbs')
 // body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// static files
+app.use(express.static('public'))
+
 // Direct request to routes/index.js
 app.use(routes)
 
