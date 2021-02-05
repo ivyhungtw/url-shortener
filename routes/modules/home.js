@@ -6,7 +6,9 @@ const router = express.Router()
 const Url = require('../../models/url')
 
 // Define variables
-const basicUrl = process.env.Url || 'http://localhost:3000/'
+const production = 'https://fathomless-stream-96837.herokuapp.com/ '
+const development = 'http://localhost:3000/'
+const basicUrl = process.env.NODE_ENV ? production : development
 
 // Create functions
 function generatePath() {
