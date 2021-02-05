@@ -8,6 +8,18 @@ const Url = require('../../models/url')
 // Define variables
 const basicUrl = 'http://localhost:3000/'
 
+// Create functions
+function generatePath() {
+  let path = ''
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  for (let i = 0; i < 5; i++) {
+    const randomNumber = Math.floor(Math.random() * characters.length)
+    path += characters[randomNumber]
+  }
+  return path
+}
+
 // Set up routes
 router.get('/', (req, res) => {
   res.render('index')
@@ -15,9 +27,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const originUrl = req.body.originUrl
-  const randomPath = Math.floor(Math.random() * 10)
+  const randomPath = generatePath()
   const shortenUrl = basicUrl + randomPath
-  console.log(shortenUrl)
+
   Url.create({
     originUrl,
     shortenUrl,
