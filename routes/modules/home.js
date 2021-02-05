@@ -27,13 +27,23 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const originUrl = req.body.originUrl
-  const randomPath = generatePath()
-  const shortenUrl = basicUrl + randomPath
+  let randomPath = generatePath()
+  let shortenUrl = basicUrl + randomPath
+  let duplicatedMsg
 
-  Url.create({
-    originUrl,
-    shortenUrl,
-  }).then(() => res.render('index', { shortenUrl }))
+  Url.exists({ shortenUrl })
+    .then(result => {
+      if (result) {
+        duplicatedMsg = 'Please try again!'
+        shortenUrl = ''
+      } else {
+        Url.create({
+          originUrl,
+          shortenUrl,
+        })
+      }
+    })
+    .then(() => res.render('index', { shortenUrl, duplicatedMsg }))
 })
 
 router.get('/:path', (req, res) => {
