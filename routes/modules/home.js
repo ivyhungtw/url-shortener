@@ -4,7 +4,7 @@ const router = express.Router()
 
 // Set up routes
 router.get('/', (req, res) => {
-  res.send('Hi')
+  res.render('index')
 })
 
 // Export
