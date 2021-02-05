@@ -14,7 +14,7 @@
       {{/if}}
 
       <div class="form-group">
-        <input type="text" class="form-control" name="originUrl" placeholder="Input URL here" {{#if shortenUrl}}value="{{ shortenUrl }}"{{/if}}>
+        <input type="text" class="form-control" name="originUrl" placeholder="Input URL here" {{#if shortenUrl}}value="{{ shortenUrl }}"{{/if}} required>
       </div>
 
       {{#if shortenUrl}}
