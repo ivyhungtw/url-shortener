@@ -1,14 +1,18 @@
-<form method="POST" action="/">
-  <input type="text" name="originUrl">
-  <button type="submit">Shorten</button>
-</form>
-{{#if shortenUrl}}
-<div>
-  <input type="text" name="shortenUrl" value="{{ shortenUrl }}">
+<div class="container">
+
+  <form method="POST" action="/">
+    <input type="text" name="originUrl">
+    <button type="submit">Shorten</button>
+  </form>
+  {{#if shortenUrl}}
+  <div>
+    <input type="text" name="shortenUrl" value="{{ shortenUrl }}">
+  </div>
+  {{/if}}
+  {{#if duplicatedMsg}}
+  <div>
+    <h4>{{ duplicatedMsg }}</h4>
+  </div>
+  {{/if}}
+
 </div>
-{{/if}}
-{{#if duplicatedMsg}}
-<div>
-  <h4>{{ duplicatedMsg }}</h4>
-</div>
-{{/if}}
