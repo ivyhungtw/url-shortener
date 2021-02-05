@@ -6,7 +6,7 @@ const router = express.Router()
 const Url = require('../../models/url')
 
 // Define variables
-const basicUrl = 'http://localhost:3000/'
+const basicUrl = process.env.Url || 'http://localhost:3000/'
 
 // Create functions
 function generatePath() {
