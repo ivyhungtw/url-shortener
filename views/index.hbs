@@ -1,1 +1,9 @@
-<h1>Hi</h1>
+<form method="POST" action="/">
+  <input type="text" name="originUrl">
+  <button type="submit">Shorten</button>
+</form>
+{{#if shortenUrl}}
+<div>
+  <input type="text" name="shortenUrl" value="{{ shortenUrl }}">
+</div>
+{{/if}}
