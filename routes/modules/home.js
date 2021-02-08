@@ -9,6 +9,8 @@ const Url = require('../../models/url')
 const production = 'https://fathomless-stream-96837.herokuapp.com/'
 const development = 'http://localhost:3000/'
 const baseUrl = process.env.NODE_ENV ? production : development
+let originUrl
+let shortenUrl
 
 // Create functions
 function generatePath() {
@@ -22,30 +24,33 @@ function generatePath() {
   return path
 }
 
+function checkDuplicates(path, res) {
+  Url.exists({ path })
+    .then(result => {
+      if (result) {
+        return checkDuplicates(generatePath())
+      } else {
+        Url.create({
+          originUrl,
+          path,
+        })
+        shortenUrl = baseUrl + path
+        return shortenUrl
+      }
+    })
+    .then(() => res.render('index', { shortenUrl }))
+}
+
 // Set up routes
 router.get('/', (req, res) => {
   res.render('index')
 })
 
 router.post('/', (req, res) => {
-  const originUrl = req.body.originUrl
+  originUrl = req.body.originUrl
   let randomPath = generatePath()
-  let shortenUrl = baseUrl + randomPath
-  let duplicatedMsg
 
-  Url.exists({ shortenUrl })
-    .then(result => {
-      if (result) {
-        duplicatedMsg = 'Please try again!'
-        shortenUrl = ''
-      } else {
-        Url.create({
-          originUrl,
-          shortenUrl,
-        })
-      }
-    })
-    .then(() => res.render('index', { shortenUrl, duplicatedMsg }))
+  checkDuplicates(randomPath, res)
 })
 
 router.get('/:path', (req, res) => {

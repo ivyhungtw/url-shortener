@@ -8,7 +8,7 @@ const Url = require('../url')
 db.once('open', () => {
   Url.create({
     originUrl: 'https://www.google.com',
-    shortenUrl: 'https://your-project-name.herokuapp.com/6y7U',
+    path: 'HVb2b',
   })
     .then(() => {
       console.log('insert data done...')
