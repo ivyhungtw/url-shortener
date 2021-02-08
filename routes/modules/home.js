@@ -57,9 +57,10 @@ router.get('/:path', (req, res) => {
   const path = req.params.path
   const shortenUrl = baseUrl + path
 
-  Url.find({ shortenUrl })
-    .then(url => {
-      const originUrl = url[0].originUrl
+  Url.find({ path })
+    .then(path => {
+      if (!path[0]) res.send('URL does not exist!')
+      const originUrl = path[0].originUrl
       res.redirect(originUrl)
     })
     .catch(error => console.log(error))
